@@ -107,63 +107,26 @@ client.on('message', message => {
   //Creating a tool for retrieving info
   if(command == 'info')
   {
-
+    //Giving a default message if no direction is given
     if(args[0] == null)
     {
       message.channel.send("Who're you talking about?\nPlease use 'info yui', 'info moa', or 'info su'");
     }
 
+    //If there are search parameters given
     else if(args[0] != null)
     {
+      //Yui search
       if(args[0].toLowerCase() == 'yui')
       {
+        //If there is no text after the name, pull up all the info
         if(args[1] == null)
         {
           //Sending the info as a message
           message.channel.send(yuiInfo);
         }
 
-        /*
-        //Quickly getting specific info
-        //Age search
-        else if(args[1].toLowerCase() == "age")
-        {
-          //Getting the place where the age begins
-          let wordNum = yuiInfo.indexOf("Birthdate");
-
-          //Getting a string from the text file
-          let dateString = yuiInfo.substring(wordNum, wordNum + 29);
-          
-          message.channel.send(dateString);
-          
-          let ts = textSearch(yuiInfo, "Birthdate", 29);
-
-          message.channel.send(ts);
-        }
-
-        //Height search
-        else if(args[1].toLowerCase() == "height")
-        {
-          /*
-          //Getting the place where the age begins
-          let wordNum = yuiInfo.indexOf("Height");
-
-          //Getting a string from the text file
-          let heightString = yuiInfo.substring(wordNum, wordNum + 20);
-          
-          message.channel.send(heightString);
-          
-
-          let strongBoi = textSearch(yuiInfo, "Height", 20);
-
-          message.channel.send(strongBoi);
-        }
-
-        else
-        {
-          message.channel.send("That's not a valid search!\nYou can currently search for: Age, Height");
-        }
-        */
+        //If there is more text, search for it, and give a result if it's there
         else 
         {
           let searchText = Search(yuiSearch, yuiInfo, args[1]);
@@ -172,100 +135,41 @@ client.on('message', message => {
         }
       }
 
+      //Moa search
       if(args[0].toLowerCase() == 'moa')
       {
+        //If there is no text after the name, pull up all the info
         if(args[1] == null)
         {
           //Sending the info as a message
           message.channel.send(moaInfo);
         }
 
-        /*
-        else if(args[1].toLowerCase() == "age")
-        {
-          //Getting the place where the age begins
-          let wordNum = moaInfo.indexOf("Birthdate");
-
-          //Getting a string from the text file
-          let dateString = moaInfo.substring(wordNum, wordNum + 29);
-          
-          message.channel.send(dateString);
-        }
-        */
+        //If there is more text, search for it, and give a result if it's there
         else
         {
           let searchText = Search(moaSearch, moaInfo, args[1]);
 
           message.channel.send(searchText);
-          //Getting the initial spot of the word
-          /*let initialValue = moaSearch.indexOf(args[1].toLowerCase());
-
-          //If the word exists in the page, do further searches
-          if(initialValue != -1)
-          {
-            //Finding the end of the line for the info
-            let secondValue = moaSearch.indexOf("   ", initialValue);
-
-            //Getting the line
-            let strong = moaInfo.substring(initialValue, secondValue);
-            
-            //Sending the line
-            message.channel.send(strong);
-          }
-
-          //If the search parameter doesn't exist, give an error message
-          else
-          {
-            message.channel.send("That isn't a valid search term! Please try something else.");
-          }
-          */
         }
       }
 
+      //Su search
       if(args[0].toLowerCase() == 'su')
       {
+        //If there is no text after the name, pull up all the info
         if(args[1] == null)
         {
           //Sending the info as a message
           message.channel.send(suInfo);
         }
 
-        /*
-        else if(args[1].toLowerCase() == "age")
-        {
-          //Getting the place where the age begins
-          let wordNum = suInfo.indexOf("Birthdate");
-
-          //Getting a string from the text file
-          let dateString = suInfo.substring(wordNum, wordNum + 34);
-          
-          message.channel.send(dateString);
-        }
-        */
         //Searching for phrases which someone might put in
         else
         {
-          //Getting the initial spot of the word
-          let initialValue = suSearch.indexOf(args[1].toLowerCase());
+          let searchText = Search(suSearch, suInfo, args[1]);
 
-          //If the word exists in the page, do further searches
-          if(initialValue != -1)
-          {
-            //Finding the end of the line for the info
-            let secondValue = suSearch.indexOf("   ", initialValue);
-
-            //Getting the line
-            let strong = suInfo.substring(initialValue, secondValue);
-            
-            //Sending the line
-            message.channel.send(strong);
-          }
-
-          //If the search parameter doesn't exist, give an error message
-          else
-          {
-            message.channel.send("That isn't a valid search term! Please try something else.");
-          }
+          message.channel.send(searchText);
         }
       }
     }
